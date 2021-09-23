@@ -17,7 +17,7 @@ from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper import button_build
-from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, torrent_searchs, delete, speedtest, count, leech_settings
+from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, shell, eval, torrent_search, delete, speedtest, count, leech_settings
 
 
 def stats(update, context):
@@ -31,38 +31,27 @@ def stats(update, context):
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    stats = f'<b>╭──「  🚦 BOT STATISTICS 🚦 」 </b>\n' \
-            f'<b>│</b>\n' \
-            f'<b>├  ⏰ Bot Uptime :</b> <code>{currentTime}</code>\n' \
-            f'<b>├  🗄 Total Disk :</b> <code>{total}</code>\n' \
-            f'<b>├  🗂 Total Used :</b> <code>{used}</code>\n' \
-            f'<b>├  📂 Total Free :</b> <code>{free}</code>\n' \
-            f'<b>│</b>\n' \
-            f'<b>├  📝 Data Usage 📝</b>\n' \
-            f'<b>│</b>\n' \
-            f'<b>├  📥 Total Download :</b> <code>{recv}</code>\n' \
-            f'<b>├  📤 Total Upload :</b> <code>{sent}</code>\n' \
-            f'<b>├  🖥️ CPU :</b> <code>{cpuUsage}%</code>\n' \
-            f'<b>├  🚀 RAM :</b> <code>{memory}%</code>\n' \
-            f'<b>├  🗄 DISK :</b> <code>{disk}%</code>\n' \
-            f'<b>╰──「 👨‍💻 @Mani5GRockers 」</b>'
+    stats = f'<b>Bot Uptime:</b> <code>{currentTime}</code>\n' \
+            f'<b>Total Disk Space:</b> <code>{total}</code>\n' \
+            f'<b>Used:</b> <code>{used}</code> ' \
+            f'<b>Free:</b> <code>{free}</code>\n\n' \
+            f'<b>Upload:</b> <code>{sent}</code>\n' \
+            f'<b>Download:</b> <code>{recv}</code>\n\n' \
+            f'<b>CPU:</b> <code>{cpuUsage}%</code> ' \
+            f'<b>RAM:</b> <code>{memory}%</code> ' \
+            f'<b>DISK:</b> <code>{disk}%</code>'
     sendMessage(stats, context.bot, update)
 
 
 def start(update, context):
     buttons = button_build.ButtonMaker()
-    buttons.buildbutton("Ⓜ️ ᴍɪʀʀᴏʀ ɢʀᴏᴜᴘ Ⓜ️", "https://t.me/awsmirrorzone")
-    buttons.buildbutton("🦸 Chat ᴍɪʀʀᴏʀ ɢʀᴏᴜᴘ 🦸‍♂️", "https://awslink.in/awsmirrorzone-support")
-    buttons.buildbutton("⚙️ AWS BOT List ⚙️", "http://t.me/mani5grockersbot")
-    buttons.buildbutton("🌐 Website 🌐", "https://bitly.awslink.in/mani5grockers")
+    buttons.buildbutton("Repo", "https://github.com/SlamDevs/slam-mirrorbot")
+    buttons.buildbutton("Channel", "https://t.me/SlamMirrorUpdates")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''
-★ This bot can mirror all your links to Drive!
-
-👲 Modded By: @Mani5GRockers
-
-★ Type /{BotCommands.HelpCommand} to get a list of available commands
+This bot can mirror all your links to Google Drive!
+Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
         sendMarkup(start_string, context.bot, update, reply_markup)
     else:
@@ -163,17 +152,11 @@ help_string_telegraph = f'''<br>
 <b>/{BotCommands.StatusCommand}</b>: Shows a status of all the downloads
 <br><br>
 <b>/{BotCommands.StatsCommand}</b>: Show Stats of the machine the bot is hosted on
-<br><br>
-<b>/{BotCommands.TsHelpCommand}</b> 🧲 help for Torrent 🔍 search:  1337x, piratebay, tgx, yts, eztv, nyaa.si, sukebei, torlock, rarbg, ts
-<br><br>
-<b>/{BotCommands.TsHelp0Command}</b> 🧲 Get help for Torrent1 🔍 search name
-<br><br>
-   ✥═══ @Mani5GRockers ═══✥
 '''
 help = Telegraph(access_token=telegraph_token).create_page(
-        title='AWS Mirror Zonebot Help',
-        author_name='❤️ Mani5GRockers ❤️',
-        author_url='https://github.com/Mani5GRockers',
+        title='Slam Mirrorbot Help',
+        author_name='Slam Mirrorbot',
+        author_url='https://github.com/SlamDevs/slam-mirrorbot',
         html_content=help_string_telegraph,
     )["path"]
 
@@ -234,8 +217,7 @@ botcmds = [
         (f'{BotCommands.PingCommand}','Ping the Bot'),
         (f'{BotCommands.RestartCommand}','Restart the bot [owner/sudo only]'),
         (f'{BotCommands.LogCommand}','Get the Bot Log [owner/sudo only]'),
-        (f'{BotCommands.TsHelpCommand}','Get help for Torrent search name'),
-        (f'{BotCommands.TsHelp0Command}','Get help for Torrent search name')
+        (f'{BotCommands.TsHelpCommand}','Get help for Torrent search module')
     ]
 '''
 
