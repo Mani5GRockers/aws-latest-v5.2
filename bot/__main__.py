@@ -170,6 +170,8 @@ help_string_telegraph = f'''
 <b>/{BotCommands.StatusCommand}</b>: Shows a status of all the downloads
 <br><br>
 <b>/{BotCommands.StatsCommand}</b>: Show Stats of the machine the bot is hosted on
+<br><br>
+   ✥═══ @Mani5GRockers ═══✥
 '''
 help = Telegraph(access_token=telegraph_token).create_page(
         title='AWS Mirror Zonebot Help',
