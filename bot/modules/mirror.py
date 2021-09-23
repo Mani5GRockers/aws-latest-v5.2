@@ -236,19 +236,20 @@ class MirrorListener(listeners.MirrorListeners):
                 update_all_messages()
             return
         with download_dict_lock:
-            msg = f'<b>Filename: </b><code>{download_dict[self.uid].name()}</code>\n<b>Size: </b><code>{size}</code>'
+            msg += f'<b>✥══ @awsmirrorzone ══✥\n\n</b>'
+            msg = f'<b>🗂 𝗙𝗶𝗹𝗲𝗡𝗮𝗺𝗲 : </b><code>{download_dict[self.uid].name()}</code>\n<b>🗃 𝐅𝐢𝐥𝐞 𝐒𝐢𝐳𝐞 : </b><code>〘{size}〙</code>'
             if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
-                msg += '\n<b>Type: </b><code>Folder</code>'
-                msg += f'\n<b>SubFolders: </b><code>{folders}</code>'
-                msg += f'\n<b>Files: </b><code>{files}</code>'
+                msg += '\n<b>⚙️ 𝐓𝐲𝐩𝐞 : </b><code>Folder</code>'
+                msg += f'\n<b>📚 𝐒𝐮𝐛𝐅𝐨𝐥𝐝𝐞𝐫𝐬 : </b><code>〘{folders}〙</code>'
+                msg += f'\n<b>🗂 𝐅𝐢𝐥𝐞𝐬 : </b><code>〘{files}〙</code>'
             else:
-                msg += f'\n<b>Type: </b><code>{typ}</code>'
+                msg += f'\n<b>⚙️ 𝐓𝐲𝐩𝐞 : </b><code>〘{typ}〙</code>'
             buttons = button_build.ButtonMaker()
             if SHORTENER is not None and SHORTENER_API is not None:
                 surl = short_url(link)
-                buttons.buildbutton("☁️ Drive Link", surl)
+                buttons.buildbutton("☁️ ᴅʀɪᴠᴇ ʟɪɴᴋ ☁️", surl)
             else:
-                buttons.buildbutton("☁️ Drive Link", link)
+                buttons.buildbutton("☁️ ᴅʀɪᴠᴇ ʟɪɴᴋ ☁️", link)
             LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
             if INDEX_URL is not None:
                 url_path = requests.utils.quote(f'{download_dict[self.uid].name()}')
@@ -257,21 +258,21 @@ class MirrorListener(listeners.MirrorListeners):
                     share_url += '/'
                     if SHORTENER is not None and SHORTENER_API is not None:
                         siurl = short_url(share_url)
-                        buttons.buildbutton("⚡ Index Link", siurl)
+                        buttons.buildbutton("🚀 ɪɴᴅᴇx ʟɪɴᴋ 🚀", siurl)
                     else:
-                        buttons.buildbutton("⚡ Index Link", share_url)
+                        buttons.buildbutton("🚀 ɪɴᴅᴇx ʟɪɴᴋ 🚀", share_url)
                 else:
                     share_urls = f'{INDEX_URL}/{url_path}?a=view'
                     if SHORTENER is not None and SHORTENER_API is not None:
                         siurl = short_url(share_url)
-                        buttons.buildbutton("⚡ Index Link", siurl)
+                        buttons.buildbutton("🚀 ɪɴᴅᴇx ʟɪɴᴋ 🚀", siurl)
                         if VIEW_LINK:
                             siurls = short_url(share_urls)
-                            buttons.buildbutton("🌐 View Link", siurls)
+                            buttons.buildbutton("🌐 View Link 🌐", siurls)
                     else:
-                        buttons.buildbutton("⚡ Index Link", share_url)
+                        buttons.buildbutton("🚀 ɪɴᴅᴇx ʟɪɴᴋ 🚀", share_url)
                         if VIEW_LINK:
-                            buttons.buildbutton("🌐 View Link", share_urls)
+                            buttons.buildbutton("🌐 View Link 🌐", share_urls)
             if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:
                 buttons.buildbutton(f"{BUTTON_FOUR_NAME}", f"{BUTTON_FOUR_URL}")
             if BUTTON_FIVE_NAME is not None and BUTTON_FIVE_URL is not None:
@@ -283,7 +284,7 @@ class MirrorListener(listeners.MirrorListeners):
             else:
                 uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
             if uname is not None:
-                msg += f'\n\ncc: {uname}'
+                msg += f'\n\n<b>👤 User : </b>👉 {uname}\n\n✅ #Uploaded To AWS Drive ✅ \n\n⛔ 𝘿𝙤 𝙣𝙤𝙩 𝙨𝙝𝙖𝙧𝙚 𝙄𝙣𝙙𝙚𝙭 𝙇𝙞𝙣𝙠 🙂\n\n <b>✥══ @Mani5GRockers ══✥</b>'
             try:
                 fs_utils.clean_download(download_dict[self.uid].path())
             except FileNotFoundError:
@@ -396,7 +397,7 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
             return
 
     elif not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
-        sendMessage('No download source provided', bot, update)
+        sendMessage("❌ 𝙳𝚘𝚗'𝚝 𝚂𝚙𝚊𝚖 𝚙𝚕𝚎𝚊𝚜𝚎 😐\n\n💁‍♀️ 𝐇𝐎𝐖 𝐓𝐎 𝐌𝐈𝐑𝐑𝐎𝐑 ?\n\n📖 Read Document 📖\n\n 👉 https://awslink.in/awsmirrorhelp", bot, update)
         return
     elif not os.path.exists(link) and not bot_utils.is_mega_link(link) and not bot_utils.is_gdrive_link(link) and not bot_utils.is_magnet(link):
         try:
