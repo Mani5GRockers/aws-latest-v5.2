@@ -438,11 +438,11 @@ def _mirror(bot, update, isTar=False, extract=False, isZip=False, isQbit=False, 
 
     elif bot_utils.is_mega_link(link):
         if BLOCK_MEGA_LINKS:
-            sendMessage("Mega links are blocked!", bot, update)
+            sendMessage("🚫 Mega links are blocked!", bot, update)
             return
         link_type = bot_utils.get_mega_link_type(link)
         if link_type == "folder" and BLOCK_MEGA_FOLDER:
-            sendMessage("Mega folder are blocked!", bot, update)
+            sendMessage("🚫 Mega folder are blocked!", bot, update)
         else:
             mega_dl = MegaDownloadHelper()
             mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener)
