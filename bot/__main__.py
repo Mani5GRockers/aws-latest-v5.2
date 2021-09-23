@@ -171,6 +171,10 @@ help_string_telegraph = f'''
 <br><br>
 <b>/{BotCommands.StatsCommand}</b>: Show Stats of the machine the bot is hosted on
 <br><br>
+<b>★ /{BotCommands.TsHelpCommand}</b> 🧲 help for Torrent 🔍 search:  1337x, piratebay, tgx, yts, eztv, nyaa.si, sukebei, torlock, rarbg, ts  ★
+<br><br>
+<b>★ /{BotCommands.TsHelp0Command}</b> 🧲 Get help for Torrent1 🔍 search name ★
+<br><br>
    ✥═══ @Mani5GRockers ═══✥
 '''
 help = Telegraph(access_token=telegraph_token).create_page(
