@@ -64,13 +64,10 @@ def start(update, context):
 
 ★ Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
-        if update.message.chat.type == "private" :
-            sendMessage(f"👤 Hey I'm AWS MIRROR BOT 👤\n\n➩ JOIN GROUP List 🏆 \n\n ✅ JOIN AWS MIRROR ZONE ✅ \n\n ✥════ @awsmirrorzone ════✥ \n\n ✅ AWS MIRROR ZONE Discussion ✅ \n\n ✥════ @aws_public_chat ════✥ \n\n👩‍⚕ Bot Developer by 👨‍⚕️   👇\n\n✥════ @Mani5GRockers ════✥ \n\n /help - How To use This Group", context.bot, update)
-        else :
-            sendMarkup(start_string, context.bot, update, reply_markup)
-    else :
+        sendMarkup(start_string, context.bot, update, reply_markup)
+    else:
         sendMarkup(
-            '🔒 Oops! not a Authorized user.\n🔐 Please contact Bot developer 👉 <b>@Mani5GRockers</b>.',
+            'Oops! not a Authorized user.\nPlease deploy your own <b>slam-mirrorbot</b>.',
             context.bot,
             update,
             reply_markup,
@@ -78,7 +75,7 @@ def start(update, context):
 
 
 def restart(update, context):
-    restart_message = sendMessage("♻️ Restarting, Please wait!", context.bot, update)
+    restart_message = sendMessage("Restarting, Please wait!", context.bot, update)
     # Save restart message object in order to reply to it after restarting
     with open(".restartmsg", "w") as f:
         f.truncate(0)
@@ -100,11 +97,7 @@ def log(update, context):
     sendLogFile(context.bot, update)
 
 
-help_string_telegraph = f'''
-    \n🎀 AWS MIRROR ZONE Help 🎀 
-<br><br>
-    ✥═══ @awsmirrorzone ═══✥
-<br><br>
+help_string_telegraph = f'''<br>
 <b>/{BotCommands.HelpCommand}</b>: To get this message
 <br><br>
 <b>/{BotCommands.MirrorCommand}</b> [download_url][magnet_link]: Start mirroring the link to Google Drive.
@@ -171,9 +164,9 @@ help_string_telegraph = f'''
 <br><br>
 <b>/{BotCommands.StatsCommand}</b>: Show Stats of the machine the bot is hosted on
 <br><br>
-<b>★ /{BotCommands.TsHelpCommand}</b> 🧲 help for Torrent 🔍 search:  1337x, piratebay, tgx, yts, eztv, nyaa.si, sukebei, torlock, rarbg, ts  ★
+<b>/{BotCommands.TsHelpCommand}</b> 🧲 help for Torrent 🔍 search:  1337x, piratebay, tgx, yts, eztv, nyaa.si, sukebei, torlock, rarbg, ts
 <br><br>
-<b>★ /{BotCommands.TsHelp0Command}</b> 🧲 Get help for Torrent1 🔍 search name ★
+<b>/{BotCommands.TsHelp0Command}</b> 🧲 Get help for Torrent1 🔍 search name
 <br><br>
    ✥═══ @Mani5GRockers ═══✥
 '''
@@ -185,33 +178,29 @@ help = Telegraph(access_token=telegraph_token).create_page(
     )["path"]
 
 help_string = f'''
-    \n🎀 AWS MIRROR ZONE Help 🎀
-    
-    ✥══ @awsmirrorzone ══✥
-    
-★ /{BotCommands.PingCommand}: Check how long it takes to Ping the Bot
+/{BotCommands.PingCommand}: Check how long it takes to Ping the Bot
 
-★ /{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
+/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
 
-★ /{BotCommands.UnAuthorizeCommand}: Unauthorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
+/{BotCommands.UnAuthorizeCommand}: Unauthorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
 
-★ /{BotCommands.AuthorizedUsersCommand}: Show authorized users (Only Owner & Sudo)
+/{BotCommands.AuthorizedUsersCommand}: Show authorized users (Only Owner & Sudo)
 
-★ /{BotCommands.AddSudoCommand}: Add sudo user (Only Owner)
+/{BotCommands.AddSudoCommand}: Add sudo user (Only Owner)
 
-★ /{BotCommands.RmSudoCommand}: Remove sudo users (Only Owner)
+/{BotCommands.RmSudoCommand}: Remove sudo users (Only Owner)
 
-★ /{BotCommands.RestartCommand}: Restart the bot
+/{BotCommands.RestartCommand}: Restart the bot
 
-★ /{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
+/{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
 
-★ /{BotCommands.SpeedCommand}: Check Internet Speed of the Host
+/{BotCommands.SpeedCommand}: Check Internet Speed of the Host
 
-★ /{BotCommands.ShellCommand}: Run commands in Shell (Only Owner)
+/{BotCommands.ShellCommand}: Run commands in Shell (Only Owner)
 
-★ /{BotCommands.ExecHelpCommand}: Get help for Executor module (Only Owner)
+/{BotCommands.ExecHelpCommand}: Get help for Executor module (Only Owner)
 
-   ✥══ @Mani5GRockers ══✥
+/{BotCommands.TsHelpCommand}: Get help for Torrent search module
 '''
 
 def bot_help(update, context):
@@ -222,31 +211,31 @@ def bot_help(update, context):
 
 '''
 botcmds = [
-        (f'{BotCommands.HelpCommand}','★ Get Detailed Help ★'),
-        (f'{BotCommands.MirrorCommand}', '★ Start Mirroring ★'),
-        (f'{BotCommands.TarMirrorCommand}','★ Start mirroring and upload as .tar ★'),
-        (f'{BotCommands.ZipMirrorCommand}','★ Start mirroring and upload as .zip ★'),
-        (f'{BotCommands.UnzipMirrorCommand}','★ Extract files ★'),
-        (f'{BotCommands.QbMirrorCommand}','🧲 Start Mirroring using qBittorrent ★'),
-        (f'{BotCommands.QbTarMirrorCommand}','🧲 Start mirroring and upload as .tar using qb ★'),
-        (f'{BotCommands.QbZipMirrorCommand}','🧲 Start mirroring and upload as .zip using qb ★'),
-        (f'{BotCommands.QbUnzipMirrorCommand}','🧲 Extract files using qBitorrent ★'),
-        (f'{BotCommands.CloneCommand}','★ Copy file/folder to Drive ★'),
-        (f'{BotCommands.CountCommand}','★ Count file/folder of Drive link ★'),
-        (f'{BotCommands.DeleteCommand}','★ Delete file from Drive ★'),
-        (f'{BotCommands.WatchCommand}','★ Mirror Youtube-dl support link ★'),
-        (f'{BotCommands.TarWatchCommand}','★ Mirror Youtube playlist link as .tar ★'),
-        (f'{BotCommands.ZipWatchCommand}','★ Mirror Youtube playlist link as .zip ★'),
-        (f'{BotCommands.CancelMirror}','🚫 Cancel a task ★'),
-        (f'{BotCommands.CancelAllCommand}','🚫 Cancel all tasks ★'),
-        (f'{BotCommands.ListCommand}','🔍 File Name Searches in Drive ★'),
-        (f'{BotCommands.StatusCommand}','★ Get Mirror Status message ★'),
-        (f'{BotCommands.StatsCommand}','📊 Bot Usage Stats ★'),
-        (f'{BotCommands.PingCommand}','★ Ping the Bot ★'),
-        (f'{BotCommands.RestartCommand}','♻️ Restart the bot [owner/sudo only] ★'),
-        (f'{BotCommands.LogCommand}','★ Get the Bot Log [owner/sudo only] ★'),
-        (f'{BotCommands.TsHelpCommand}','🧲 help for Torrent search:  1337x, piratebay, tgx, yts, eztv, nyaa.si, sukebei, torlock, rarbg, ts  ★'),
-        (f'{BotCommands.TsHelp0Command}','🧲 Get help for Torrent1 search name ★')
+        (f'{BotCommands.HelpCommand}','Get Detailed Help'),
+        (f'{BotCommands.MirrorCommand}', 'Start Mirroring'),
+        (f'{BotCommands.TarMirrorCommand}','Start mirroring and upload as .tar'),
+        (f'{BotCommands.ZipMirrorCommand}','Start mirroring and upload as .zip'),
+        (f'{BotCommands.UnzipMirrorCommand}','Extract files'),
+        (f'{BotCommands.QbMirrorCommand}','Start Mirroring using qBittorrent'),
+        (f'{BotCommands.QbTarMirrorCommand}','Start mirroring and upload as .tar using qb'),
+        (f'{BotCommands.QbZipMirrorCommand}','Start mirroring and upload as .zip using qb'),
+        (f'{BotCommands.QbUnzipMirrorCommand}','Extract files using qBitorrent'),
+        (f'{BotCommands.CloneCommand}','Copy file/folder to Drive'),
+        (f'{BotCommands.CountCommand}','Count file/folder of Drive link'),
+        (f'{BotCommands.DeleteCommand}','Delete file from Drive'),
+        (f'{BotCommands.WatchCommand}','Mirror Youtube-dl support link'),
+        (f'{BotCommands.TarWatchCommand}','Mirror Youtube playlist link as .tar'),
+        (f'{BotCommands.ZipWatchCommand}','Mirror Youtube playlist link as .zip'),
+        (f'{BotCommands.CancelMirror}','Cancel a task'),
+        (f'{BotCommands.CancelAllCommand}','Cancel all tasks'),
+        (f'{BotCommands.ListCommand}','Searches files in Drive'),
+        (f'{BotCommands.StatusCommand}','Get Mirror Status message'),
+        (f'{BotCommands.StatsCommand}','Bot Usage Stats'),
+        (f'{BotCommands.PingCommand}','Ping the Bot'),
+        (f'{BotCommands.RestartCommand}','Restart the bot [owner/sudo only]'),
+        (f'{BotCommands.LogCommand}','Get the Bot Log [owner/sudo only]'),
+        (f'{BotCommands.TsHelpCommand}','Get help for Torrent search name'),
+        (f'{BotCommands.TsHelp0Command}','Get help for Torrent search name')
     ]
 '''
 
@@ -258,11 +247,11 @@ def main():
     if os.path.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        bot.edit_message_text("✅ Restarted successfully!", chat_id, msg_id)
+        bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
         os.remove(".restartmsg")
     elif OWNER_ID:
         try:
-            text = "<b>✅ Bot Restarted!</b>"
+            text = "<b>Bot Restarted!</b>"
             bot.sendMessage(chat_id=OWNER_ID, text=text, parse_mode=ParseMode.HTML)
             if AUTHORIZED_CHATS:
                 for i in AUTHORIZED_CHATS:
@@ -287,7 +276,7 @@ def main():
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
     updater.start_polling(drop_pending_updates=IGNORE_PENDING_REQUESTS)
-    LOGGER.info("✅ Bot Started!")
+    LOGGER.info("Bot Started!")
     signal.signal(signal.SIGINT, fs_utils.exit_clean_up)
 
 app.start()
